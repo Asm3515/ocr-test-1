@@ -128,7 +128,7 @@ export default function VoiceQuery({
       <div className="flex items-center gap-2">
         <button
           onClick={startStop}
-          className={`px-4 py-2 rounded-xl border ${listening ? "bg-red-100" : "bg-blue-100"}`}
+          className={`px-4 py-2 rounded-xl border font-bold text-black ${listening ? "bg-red-100" : "bg-blue-100"}`}
           title={listening ? "Stop" : "Hold to speak"}
         >
           {listening ? "⏹ Stop" : "🎤 Speak"}
@@ -138,13 +138,13 @@ export default function VoiceQuery({
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder={placeholder}
-          className="flex-1 px-3 py-2 border rounded-xl"
+          className="flex-1 px-3 py-2 border rounded-xl "
         />
 
         <button
           onClick={() => query && runQuery(query)}
           disabled={!query || loading}
-          className="px-4 py-2 rounded-xl border bg-gray-100 disabled:opacity-50"
+          className="px-4 py-2 rounded-xl border bg-gray-100 disabled:opacity-50 font-bold text-black"
         >
           Search
         </button>
@@ -175,7 +175,7 @@ export default function VoiceQuery({
             {r.tags?.length ? (
               <div className="text-xs mt-1">
                 {r.tags.map(t => (
-                  <span key={t} className="inline-block mr-1 mb-1 px-2 py-0.5 bg-gray-100 rounded-full">{t}</span>
+                  <span key={t} className="inline-block mr-1 mb-1 px-2 py-0.5 bg-gray-100 rounded-full text-black">{t}</span>
                 ))}
               </div>
             ) : null}
