@@ -1,36 +1,35 @@
 export type CurrencyCode = "USD";
 
-/** One line item on the invoice */
+/** Individual line item within an invoice */
 export interface LineItem {
-  item: string;              // e.g., "Nintendo 64 Console"
-  quantity: number;          // integer >= 1
-  unitPrice: number;         // numeric, e.g., 120.00
-  currency: CurrencyCode;    // "USD"
-  // Optional derived helpers (not required in DB)
-  totalPrice?: number;       // quantity * unitPrice
+  item: string;              
+  quantity: number;          
+  unitPrice: number;         
+  currency: CurrencyCode;    
+  totalPrice?: number;       
 }
 
-/** Main invoice document */
+/** Main invoice document structure */
 export interface InvoiceDoc {
   _id?: string;
 
-  vendor: string;            // "Wood-Kim"
-  amount: number;            // 164.97 (numeric total)
-  currency: CurrencyCode;    // "USD"
-  date: string;              // "YYYY-MM-DD"
-  invoiceNumber?: string;    // "18999056"
+  vendor: string;            
+  amount: number;            
+  currency: CurrencyCode;    
+  date: string;              
+  invoiceNumber?: string;    
 
-  description?: string;      // long raw OCR text
-  summary?: string;          // short LLM summary
+  description?: string;      
+  summary?: string;          
 
-  tags: string[];            // ["Nintendo 64","console","games","electronics"]
-  category?: string;         // "Electronics"
+  tags: string[];            
+  category?: string;         
 
-  lineItems?: LineItem[];    // per-item breakdown (optional)
+  lineItems?: LineItem[];    
 
-  embedding?: number[];      // length 1536 vector for ANN search
+  embedding?: number[];      
 
-  filename?: string;         // "batch1-0501.jpg"
-  uploadedAt: Date;          // ISODate
-  processed: boolean;        // true/false
+  filename?: string;         
+  uploadedAt: Date;          
+  processed: boolean;        
 }

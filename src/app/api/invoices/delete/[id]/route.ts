@@ -10,10 +10,10 @@ export const runtime = "nodejs";
  */
 export async function DELETE(
   _req: Request,
-  context: { params: Promise<{ id: string }> } // 👈 params is a Promise in Next 15 types
+  context: { params: Promise<{ id: string }> } 
 ) {
   try {
-    const { id } = await context.params; // 👈 await it
+    const { id } = await context.params; 
 
     if (!id || !ObjectId.isValid(id)) {
       return NextResponse.json({ ok: false, error: "Invalid or missing id" }, { status: 400 });

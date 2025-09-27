@@ -26,5 +26,5 @@ export function categorizeInvoice(input: {
   if (tags.includes("service")) return "Service";
   if (tags.includes("tech")) return "Tech";
 
-  return undefined; // let API treat as "Uncategorized"
+  return undefined; 
 }

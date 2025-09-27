@@ -1,5 +1,3 @@
-// Very lightweight heuristics to turn NL into Mongo filters.
-// You can extend this (or swap to an LLM extractor if you want).
 
 type MongoFilter = {
   amount?: { $gte?: number; $lte?: number };

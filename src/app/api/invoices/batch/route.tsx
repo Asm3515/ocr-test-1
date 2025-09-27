@@ -95,13 +95,13 @@ export async function POST(req: Request) {
         });
         continue;
       }
-      // ... after `parsed` is built and before insert:
+      // 4. Categorize invoice
       const category = categorizeInvoice({
         tags: parsed.tags,
         summary: parsed.summary,
         lineItems: parsed.lineItems
       });
-      // 4. Insert into MongoDB
+      // 5. Insert into MongoDB
       const doc = {
         ...parsed,
         category,   

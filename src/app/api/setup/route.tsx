@@ -57,7 +57,7 @@ export async function POST() {
       console.warn("Vector index create (non-fatal):", e?.message);
     }
 
-    return NextResponse.json({ ok: true, message: "DB/collection ready; validator & indexes applied." });
+    return NextResponse.json({ ok: true, message: "DB/collection ready" });
   } catch (e: any) {
     return NextResponse.json({ ok: false, error: e?.message }, { status: 500 });
   }
