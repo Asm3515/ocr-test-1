@@ -9,7 +9,7 @@ const openapi = {
     version: "1.0.0",
     description: "APIs for invoice upload, parsing, metrics, and vector search",
   },
-  servers: [{ url: "http://localhost:3000" }],
+  servers: [{ url: "https://ocr-test-1.vercel.app" }],
   tags: [
     { name: "Health" },
     { name: "Setup" },
@@ -157,7 +157,52 @@ const openapi = {
           "200": { description: "OK", content: { "application/json": { schema: { $ref: "#/components/schemas/BackfillResponse" }}}}
         }
       }
+    },
+    "/api/invoices/delete/{id}": {
+    delete: {
+      tags: ["Invoices"],
+      summary: "Delete invoice by _id (also removes embedding from index)",
+      parameters: [
+        { name: "id", in: "path", required: true, schema: { type: "string" } }
+      ],
+      responses: {
+        "200": { description: "Deleted", content: { "application/json": { schema: { type: "object", properties: { ok: { type: "boolean" }, deletedId: { type: "string" } } } } } },
+        "400": { description: "Invalid id", content: { "application/json": { schema: { $ref: "#/components/schemas/Error" }}}},
+        "404": { description: "Not found", content: { "application/json": { schema: { $ref: "#/components/schemas/Error" }}}},
+        "500": { description: "Server error", content: { "application/json": { schema: { $ref: "#/components/schemas/Error" }}}}
+      }
     }
+  },
+  "/api/invoices/by-key": {
+    delete: {
+      tags: ["Invoices"],
+      summary: "Delete invoice by vendor + invoiceNumber",
+      requestBody: {
+        required: true,
+        content: {
+          "application/json": {
+            schema: {
+              type: "object",
+              properties: {
+                vendor: { type: "string" },
+                invoiceNumber: { type: "string" }
+              },
+              required: ["vendor", "invoiceNumber"]
+            }
+          }
+        }
+      },
+      responses: {
+        "200": { description: "Deleted", content: { "application/json": { schema: { type: "object", properties: { ok: { type: "boolean" }, deleted: { type: "object", properties: { vendor: { type: "string" }, invoiceNumber: { type: "string" }}}}}}} },
+        "400": { description: "Bad request", content: { "application/json": { schema: { $ref: "#/components/schemas/Error" }}}},
+        "404": { description: "Not found", content: { "application/json": { schema: { $ref: "#/components/schemas/Error" }}}},
+        "500": { description: "Server error", content: { "application/json": { schema: { $ref: "#/components/schemas/Error" }}}}
+      }
+    }
+  }
+
+
+
   },
   components: {
     schemas: {

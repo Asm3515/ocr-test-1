@@ -8,7 +8,17 @@ const SwaggerUI = dynamic(() => import("swagger-ui-react"), { ssr: false });
 export default function SwaggerPage() {
   return (
     <div style={{ height: "100vh" }}>
-      <SwaggerUI url="/api/openapi" docExpansion="list" defaultModelsExpandDepth={0} />
+      <style jsx global>{`
+        .swagger-ui .scheme-container {
+          display: none !important;
+        }
+      `}</style>
+
+      <SwaggerUI
+        url="/api/openapi"
+        docExpansion="list"
+        defaultModelsExpandDepth={0}
+      />
     </div>
   );
 }
